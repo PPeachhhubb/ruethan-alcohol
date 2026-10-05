@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>รู้ทัน รู้คิด รู้พิษแอลกอฮอล์ | ฉบับศึกษาเพิ่มเติม</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;font-family:'Kanit',sans-serif;background:#fff9f2;color:#3f3a45;line-height:1.75}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);box-shadow:0 3px 18px #0001;display:flex;justify-content:space-between;align-items:center;padding:12px 6%;gap:20px}
+.logo{font-weight:700;color:#d94f70;font-size:1.08rem}.logo span{color:#6c63a8}
+.links a{color:#4a4650;text-decoration:none;margin-left:15px;font-size:.9rem}.links a:hover{color:#d94f70}
+.hero{padding:65px 7% 75px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:40px;background:linear-gradient(135deg,#ffe4e8,#fff7db 55%,#dff7f1)}
+.badge{display:inline-block;background:#fff;border:2px solid #ffd0d8;color:#d64e6e;border-radius:99px;padding:6px 15px;font-size:.88rem}
+h1{font-size:clamp(2.2rem,5vw,4.4rem);line-height:1.12;margin:18px 0 12px;color:#34313d}h1 em{font-style:normal;color:#d94f70}
+.hero p{font-size:1.08rem;max-width:650px;color:#625d68}
+.btn{display:inline-block;margin-top:16px;padding:12px 23px;border-radius:14px;background:#d94f70;color:#fff;text-decoration:none;font-weight:500;box-shadow:0 8px 20px #d94f7040}.btn.alt{background:#fff;color:#d94f70;margin-left:8px}
+.bottle-zone{position:relative;min-height:390px;display:flex;align-items:center;justify-content:center}.glow{position:absolute;width:310px;height:310px;border-radius:50%;background:#ffffff99}
+.bottle{font-size:10rem;filter:drop-shadow(0 15px 8px #0002);transform:rotate(-7deg);z-index:2}.sticker{position:absolute;background:#fff;border-radius:20px;padding:10px 15px;box-shadow:0 8px 20px #0002;font-size:1.8rem;z-index:3}.s1{top:35px;right:5%}.s2{bottom:35px;left:4%}.s3{top:48%;right:0;font-size:1rem;color:#d94f70}
+section{padding:70px 7%;max-width:1250px;margin:auto}.section-title{text-align:center;margin-bottom:38px}.section-title h2{font-size:2.2rem;margin:0;color:#38333f}.section-title p{color:#77717c;margin:5px auto;max-width:760px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.card{background:#fff;border-radius:24px;padding:27px;box-shadow:0 8px 30px #5d455c10;border:1px solid #f0e8e8;transition:.25s}.card:hover{transform:translateY(-5px);box-shadow:0 14px 35px #5d455c18}
+.icon{font-size:2.5rem;margin-bottom:8px}.card h3{margin:5px 0 8px;color:#4d4654}.card p{margin:0;color:#6c6670}
+.toxin{background:linear-gradient(135deg,#eeeaff,#e8f8f4);border-radius:30px;padding:38px}.toxin-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}.molecule{font-size:5rem;text-align:center;letter-spacing:10px}.warning{background:#fff3d7;border-left:5px solid #f0ad3d;padding:15px 18px;border-radius:12px;margin-top:18px}
+.fact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.fact{background:#fff;border-radius:22px;padding:25px;text-align:center;border:1px solid #f1e7e7}.fact strong{display:block;font-size:2.1rem;color:#d94f70}.fact span{color:#6d6670}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.timeline .card{position:relative}.tag{display:inline-block;background:#f1edff;color:#6656a5;border-radius:99px;padding:3px 10px;font-size:.8rem}
+.myth{cursor:pointer}.myth .answer{display:none;margin-top:12px;padding:12px 15px;border-radius:12px;background:#eef9f5;color:#4d665f}.myth.open .answer{display:block}.myth .click{font-size:.82rem;color:#d94f70}
+.quiz{max-width:850px;margin:auto;background:#fff;border-radius:28px;padding:32px;box-shadow:0 10px 35px #0000000d}.question{padding:20px 0;border-bottom:1px solid #eee}.question:last-child{border:0}.option{display:block;margin:8px 0;padding:10px 14px;border:1px solid #eee;border-radius:12px;cursor:pointer}.option:hover{background:#fff5f7}.result{margin-top:20px;padding:18px;border-radius:15px;background:#f0f8f5;display:none}.quiz button{border:0;cursor:pointer;font:inherit}
+.sources{background:#f5f1ff;border-radius:28px;padding:32px}.sources li{margin:9px 0}.sources a{color:#6656a5}
+.cta{margin-top:35px;text-align:center;background:#fff;border-radius:28px;padding:35px;box-shadow:0 10px 30px #0000000c}
+footer{background:#393541;color:#fff;text-align:center;padding:30px 7%;margin-top:50px}footer small{opacity:.75}
+@media(max-width:800px){nav{padding:10px 4%}.links{display:none}.hero{grid-template-columns:1fr;padding:48px 6%}.bottle-zone{min-height:300px}.bottle{font-size:7rem}.grid,.toxin-grid,.fact-grid,.timeline{grid-template-columns:1fr}.section-title h2{font-size:1.8rem}section{padding:55px 6%}.btn.alt{margin-left:0}}
+</style>
+</head>
+<body id="top">
+
+<nav>
+  <div class="logo">🍷 รู้ทัน <span>รู้คิด</span> รู้พิษแอลกอฮอล์</div>
+  <div class="links">
+    <a href="#toxin">สารพิษ</a><a href="#harm">โทษ</a><a href="#facts">ข้อเท็จจริง</a>
+    <a href="#myths">ความเข้าใจผิด</a><a href="#quiz">แบบทดสอบ</a><a href="#sources">อ้างอิง</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <span class="badge">💡 เว็บไซต์ให้ความรู้เพื่อการป้องกันและตระหนักรู้</span>
+    <h1>รู้ทัน <em>รู้คิด</em><br>รู้พิษแอลกอฮอล์</h1>
+    <p>เรียนรู้ว่าแอลกอฮอล์คืออะไร ส่งผลต่อสมองและร่างกายอย่างไร และทำไมการป้องกันตั้งแต่เนิ่น ๆ จึงสำคัญ</p>
+    <a class="btn" href="#toxin">เริ่มเรียนรู้ ↓</a>
+    <a class="btn alt" href="#quiz">ทำแบบทดสอบ</a>
+  </div>
+  <div class="bottle-zone">
+    <div class="glow"></div><div class="sticker s1">🧠</div><div class="sticker s2">🚫</div>
+    <div class="sticker s3">รู้ข้อมูล<br>ก่อนตัดสินใจ</div><div class="bottle">🍾</div>
+  </div>
+</header>
+
+<section id="toxin">
+  <div class="section-title">
+    <h2>🧪 แอลกอฮอล์คืออะไร?</h2>
+    <p>เครื่องดื่มแอลกอฮอล์มี “เอทานอล” ซึ่งเป็นสารออกฤทธิ์ต่อจิตประสาทและเป็นสารที่มีพิษต่อร่างกาย</p>
+  </div>
+  <div class="toxin">
+    <div class="toxin-grid">
+      <div>
+        <h2>เอทานอล (Ethanol)</h2>
+        <p>หลังเข้าสู่ร่างกาย เอทานอลจะเข้าสู่กระแสเลือดและส่งผลต่อระบบประสาทส่วนกลาง จึงเกี่ยวข้องกับการเปลี่ยนแปลงด้านการคิด การตัดสินใจ การประสานงานของร่างกาย และพฤติกรรม</p>
+        <div class="warning">⚠️ WHO ระบุว่าแอลกอฮอล์เกี่ยวข้องกับโรค การบาดเจ็บ และภาวะสุขภาพมากกว่า 200 รายการ</div>
+      </div>
+      <div class="molecule">🧪 ➜ 🩸 ➜ 🧠</div>
+    </div>
+  </div>
+</section>
+
+<section id="harm">
+  <div class="section-title"><h2>🚨 ผลกระทบต่อร่างกาย</h2><p>ผลกระทบมีทั้งระยะสั้นและระยะยาว และไม่ได้จำกัดอยู่เพียงอวัยวะใดอวัยวะหนึ่ง</p></div>
+  <div class="grid">
+    <div class="card"><div class="icon">🧠</div><h3>สมองและระบบประสาท</h3><p>อาจทำให้การคิด การตัดสินใจ ความจำ การทรงตัว และการควบคุมตนเองแย่ลง</p></div>
+    <div class="card"><div class="icon">🍂</div><h3>ตับ</h3><p>การได้รับแอลกอฮอล์เป็นเวลานานสัมพันธ์กับโรคตับหลายชนิด</p></div>
+    <div class="card"><div class="icon">🫀</div><h3>หัวใจและหลอดเลือด</h3><p>การดื่มสัมพันธ์กับความเสี่ยงของโรคหัวใจและหลอดเลือดบางชนิด</p></div>
+    <div class="card"><div class="icon">🧬</div><h3>มะเร็ง</h3><p>แอลกอฮอล์เป็นสารก่อมะเร็งที่มีหลักฐานชัดเจน และเพิ่มความเสี่ยงของมะเร็งหลายชนิด</p></div>
+    <div class="card"><div class="icon">🚗</div><h3>การบาดเจ็บและอุบัติเหตุ</h3><p>ผลต่อการตัดสินใจและการประสานงานของร่างกายเพิ่มความเสี่ยงต่อการบาดเจ็บ</p></div>
+    <div class="card"><div class="icon">💬</div><h3>สังคมและความสัมพันธ์</h3><p>การดื่มที่เป็นปัญหาอาจเกี่ยวข้องกับปัญหาครอบครัว การเรียน การทำงาน และการเงิน</p></div>
+  </div>
+</section>
+
+<section id="facts">
+  <div class="section-title"><h2>📊 ข้อเท็จจริงที่ควรรู้</h2><p>ข้อมูลสรุปจากองค์การอนามัยโลก (WHO) จากรายงานและข้อมูลที่เผยแพร่ในปี 2024</p></div>
+  <div class="fact-grid">
+    <div class="fact"><strong>2.6 ล้าน</strong><span>ประมาณการผู้เสียชีวิตทั่วโลกที่มีสาเหตุจากการบริโภคแอลกอฮอล์ในปี 2019</span></div>
+    <div class="fact"><strong>200+</strong><span>โรค การบาดเจ็บ และภาวะสุขภาพที่มีความเชื่อมโยงเชิงสาเหตุกับแอลกอฮอล์</span></div>
+    <div class="fact"><strong>400 ล้าน</strong><span>ประมาณการผู้มีความผิดปกติจากการใช้แอลกอฮอล์ในประชากรอายุ 15 ปีขึ้นไปทั่วโลก</span></div>
+  </div>
+  <div class="warning">ข้อมูลสถิติเป็นข้อมูลระดับโลกจาก WHO และไม่ได้หมายความว่าตัวเลขดังกล่าวเป็นสถิติของประเทศไทยโดยตรง</div>
+</section>
+
+<section id="brain">
+  <div class="section-title"><h2>🧠 ทำไมสมองจึงได้รับผลกระทบ?</h2><p>แอลกอฮอล์ออกฤทธิ์ต่อระบบประสาทส่วนกลาง จึงอาจกระทบความสามารถหลายด้านพร้อมกัน</p></div>
+  <div class="timeline">
+    <div class="card"><span class="tag">1 · การรับรู้</span><h3>ประมวลผลช้าลง</h3><p>การรับข้อมูลและการตอบสนองอาจทำได้ไม่ดีเท่าเดิม</p></div>
+    <div class="card"><span class="tag">2 · การตัดสินใจ</span><h3>ประเมินความเสี่ยงผิดพลาด</h3><p>ความสามารถในการยับยั้งพฤติกรรมและตัดสินใจอาจลดลง</p></div>
+    <div class="card"><span class="tag">3 · การควบคุมร่างกาย</span><h3>การประสานงานลดลง</h3><p>การทรงตัวและการประสานงานของการเคลื่อนไหวอาจแย่ลง</p></div>
+    <div class="card"><span class="tag">4 · ระยะยาว</span><h3>เกิดปัญหาสุขภาพได้</h3><p>การดื่มที่เป็นอันตรายสัมพันธ์กับปัญหาสุขภาพกายและจิตใจหลายด้าน</p></div>
+  </div>
+</section>
+
+<section id="myths">
+  <div class="section-title"><h2>❓ จริงหรือไม่? ความเข้าใจผิดเกี่ยวกับแอลกอฮอล์</h2><p>กดที่แต่ละข้อเพื่อดูคำอธิบาย</p></div>
+  <div class="grid">
+    <div class="card myth" onclick="this.classList.toggle('open')"><h3>“ดื่มนิดเดียวไม่มีความเสี่ยงเลย”</h3><p class="click">กดเพื่อดูคำตอบ</p><div class="answer">ไม่ควรสรุปว่าไม่มีความเสี่ยงเลย เพราะ WHO ระบุว่าการบริโภคแอลกอฮอล์แม้ในระดับต่ำก็มีความเสี่ยงต่อสุขภาพ</div></div>
+    <div class="card myth" onclick="this.classList.toggle('open')"><h3>“แอลกอฮอล์มีผลแค่กับตับ”</h3><p class="click">กดเพื่อดูคำตอบ</p><div class="answer">ไม่จริง ผลกระทบเกี่ยวข้องกับหลายระบบ รวมถึงสมอง หัวใจ ระบบย่อยอาหาร สุขภาพจิต การบาดเจ็บ และความเสี่ยงมะเร็ง</div></div>
+    <div class="card myth" onclick="this.classList.toggle('open')"><h3>“ผลกระทบมีเฉพาะคนที่ดื่มเท่านั้น”</h3><p class="click">กดเพื่อดูคำตอบ</p><div class="answer">ไม่เสมอไป อันตรายจากแอลกอฮอล์อาจกระทบคนอื่นผ่านอุบัติเหตุ ความขัดแย้ง และปัญหาทางสังคมได้</div></div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="section-title"><h2>📝 แบบทดสอบความรู้</h2><p>ทบทวนความรู้จากเว็บไซต์นี้ 5 ข้อ</p></div>
+  <div class="quiz">
+    <div class="question"><b>1. สารสำคัญในเครื่องดื่มแอลกอฮอล์ที่ออกฤทธิ์ต่อจิตประสาทคืออะไร?</b>
+      <label class="option"><input type="radio" name="q1" value="1"> เอทานอล</label><label class="option"><input type="radio" name="q1" value="0"> กลูโคส</label><label class="option"><input type="radio" name="q1" value="0"> ออกซิเจน</label>
+    </div>
+    <div class="question"><b>2. แอลกอฮอล์เกี่ยวข้องกับโรคและภาวะสุขภาพประมาณกี่รายการขึ้นไป?</b>
+      <label class="option"><input type="radio" name="q2" value="0"> 10</label><label class="option"><input type="radio" name="q2" value="1"> มากกว่า 200</label><label class="option"><input type="radio" name="q2" value="0"> 2</label>
+    </div>
+    <div class="question"><b>3. ข้อใดถูกต้อง?</b>
+      <label class="option"><input type="radio" name="q3" value="1"> แอลกอฮอล์อาจส่งผลต่อสมองและการตัดสินใจ</label><label class="option"><input type="radio" name="q3" value="0"> แอลกอฮอล์ส่งผลเฉพาะตับ</label><label class="option"><input type="radio" name="q3" value="0"> แอลกอฮอล์ไม่มีผลต่อการประสานงานของร่างกาย</label>
+    </div>
+    <div class="question"><b>4. ข้อใดเป็นผลกระทบทางสังคมที่อาจเกี่ยวข้องกับการดื่มที่เป็นปัญหา?</b>
+      <label class="option"><input type="radio" name="q4" value="0"> ไม่มีผลใด ๆ</label><label class="option"><input type="radio" name="q4" value="1"> ปัญหาครอบครัว การเรียน การทำงาน หรือการเงิน</label><label class="option"><input type="radio" name="q4" value="0"> ทำให้ทุกคนมีความสัมพันธ์ดีขึ้น</label>
+    </div>
+    <div class="question"><b>5. จุดประสงค์สำคัญของเว็บไซต์นี้คืออะไร?</b>
+      <label class="option"><input type="radio" name="q5" value="1"> ให้ความรู้และสร้างความตระหนักเพื่อป้องกันอันตราย</label><label class="option"><input type="radio" name="q5" value="0"> ชักชวนให้ทดลองดื่ม</label><label class="option"><input type="radio" name="q5" value="0"> โฆษณาเครื่องดื่ม</label>
+    </div>
+    <button class="btn" onclick="checkQuiz()">ตรวจคำตอบ</button>
+    <div id="result" class="result"></div>
+  </div>
+</section>
+
+<section id="sources">
+  <div class="section-title"><h2>📚 แหล่งอ้างอิง</h2><p>ใช้สำหรับศึกษาต่อและตรวจสอบข้อมูลของเว็บไซต์</p></div>
+  <div class="sources">
+    <ul>
+      <li><a href="https://www.who.int/news-room/fact-sheets/detail/alcohol" target="_blank">World Health Organization (WHO) — Alcohol Fact Sheet (28 June 2024)</a></li>
+      <li><a href="https://www.who.int/publications/i/item/9789240096745" target="_blank">WHO — Global status report on alcohol and health and treatment of substance use disorders (2024)</a></li>
+      <li><a href="https://www.who.int/health-topics/alcohol" target="_blank">WHO — Alcohol: Health topic</a></li>
+    </ul>
+    <p><b>หมายเหตุ:</b> เว็บไซต์นี้จัดทำเพื่อการศึกษาและการสร้างความตระหนัก ไม่ใช่เครื่องมือวินิจฉัยหรือคำแนะนำทางการแพทย์</p>
+  </div>
+  <div class="cta">
+    <h2>🌱 รู้ข้อมูล = รู้จักป้องกัน</h2>
+    <p>หากมีคนที่มีอาการผิดปกติหรืออยู่ในภาวะฉุกเฉิน ควรรีบบอกผู้ใหญ่ที่ไว้ใจและขอความช่วยเหลือจากบุคลากรทางการแพทย์</p>
+    <a class="btn" href="#top">กลับไปด้านบน ↑</a>
+  </div>
+</section>
+
+<footer>
+  <strong>🍷 รู้ทัน รู้คิด รู้พิษแอลกอฮอล์</strong><br>
+  <small>เว็บไซต์เพื่อการศึกษา • ฉบับศึกษาเพิ่มเติม</small>
+</footer>
+
+<script>
+function checkQuiz(){
+  let score=0;
+  for(let i=1;i<=5;i++){
+    const selected=document.querySelector('input[name="q'+i+'"]:checked');
+    if(selected) score += Number(selected.value);
+  }
+  const result=document.getElementById('result');
+  result.style.display='block';
+  if(score===5){
+    result.innerHTML='🎉 ได้ '+score+'/5 คะแนน — เยี่ยมมาก! คุณเข้าใจเนื้อหาหลักของเว็บไซต์แล้ว';
+  }else if(score>=3){
+    result.innerHTML='👍 ได้ '+score+'/5 คะแนน — ทำได้ดี ลองอ่านหัวข้อที่ยังไม่มั่นใจแล้วทำแบบทดสอบอีกครั้ง';
+  }else{
+    result.innerHTML='📖 ได้ '+score+'/5 คะแนน — ลองกลับไปอ่านหัวข้อสารพิษ ผลกระทบ และความเข้าใจผิด แล้วทบทวนอีกครั้ง';
+  }
+}
+</script>
+</body>
+</html>
