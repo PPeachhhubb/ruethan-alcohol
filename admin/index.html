@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin | รู้ทัน รู้คิด รู้พิษแอลกอฮอล์</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--pink:#e84d72;--ink:#4c4650;--bg:#fff9f8;--card:#fff;--line:#eadfe2}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff7f4,#f4f9ff);font-family:system-ui,"Noto Sans Thai",sans-serif;color:var(--ink)}
+.wrap{max-width:1180px;margin:auto;padding:24px}.hero,.card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 30px #4c465014}.hero{padding:28px;margin-bottom:18px}.hero h1{margin:6px 0;font-size:30px}.hero p{margin:0;color:#777}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.stat{padding:18px;background:#fff;border:1px solid var(--line);border-radius:18px}.stat b{font-size:28px;display:block;color:var(--pink)}
+.card{padding:20px;overflow:auto}h2{margin-top:0}
+button{border:0;border-radius:12px;padding:11px 15px;background:var(--pink);color:#fff;font-weight:700;cursor:pointer}button.secondary{background:#6d6870}button.danger{background:#777}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+table{width:100%;border-collapse:collapse;min-width:950px}th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:14px}th{background:#fff5f7;position:sticky;top:0}
+.login{max-width:430px;margin:70px auto}.login input{width:100%;padding:13px;margin:7px 0 12px;border:1px solid var(--line);border-radius:12px;font:inherit}.msg{margin-top:10px;color:#b33}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section id="loginBox" class="card login">
+<h1>🔐 ผู้ดูแลระบบ</h1>
+<p>เข้าสู่ระบบเพื่อดูข้อมูลแบบสอบถาม</p>
+<input id="email" type="email" placeholder="อีเมล">
+<input id="password" type="password" placeholder="รหัสผ่าน">
+<button id="loginBtn">เข้าสู่ระบบ</button>
+<div id="loginMsg" class="msg"></div>
+</section>
+
+<div id="app" style="display:none">
+<header class="hero">
+<h1>🌱 รู้ทัน รู้คิด รู้พิษแอลกอฮอล์</h1>
+<p>แดชบอร์ดข้อมูลแบบสอบถามสำหรับผู้จัดทำโครงงาน</p>
+</header>
+<div class="grid">
+<div class="stat">ผู้ตอบทั้งหมด<b id="total">0</b></div>
+<div class="stat">มาเข้าร่วมกิจกรรม<b id="attend">0</b></div>
+<div class="stat">ไม่มา<b id="notAttend">0</b></div>
+<div class="stat">อายุเฉลี่ย<b id="avgAge">-</b></div>
+</div>
+<section class="card">
+<div class="toolbar">
+<button id="refresh">🔄 รีเฟรช</button>
+<button id="export">📥 Export CSV</button>
+<button class="secondary" id="logout">ออกจากระบบ</button>
+</div>
+<table>
+<thead><tr><th>วันเวลา</th><th>ชื่อ</th><th>นามสกุล</th><th>เพศ</th><th>อายุ</th><th>ความถี่</th><th>ความตั้งใจ</th><th>กิจกรรม</th></tr></thead>
+<tbody id="rows"></tbody>
+</table>
+</section>
+</div>
+</div>
+
+<script src="../config.js"></script>
+<script>
+const {createClient}=supabase;
+const db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+let data=[];
+
+const $=id=>document.getElementById(id);
+$("loginBtn").onclick=async()=>{
+  $("loginMsg").textContent="";
+  const {error}=await db.auth.signInWithPassword({email:$("email").value,password:$("password").value});
+  if(error){$("loginMsg").textContent="เข้าสู่ระบบไม่สำเร็จ: "+error.message;return;}
+  await boot();
+};
+
+async function boot(){
+  const {data:{session}}=await db.auth.getSession();
+  if(!session)return;
+  const {data:admin,error:adminErr}=await db.from("admin_users").select("user_id").eq("user_id",session.user.id).maybeSingle();
+  if(adminErr||!admin){
+    await db.auth.signOut();
+    $("loginMsg").textContent="บัญชีนี้ยังไม่ได้รับสิทธิ์ผู้ดูแล";
+    return;
+  }
+  $("loginBox").style.display="none"; $("app").style.display="block"; load();
+}
+
+async function load(){
+  const {data:rows,error}=await db.from("survey_responses").select("*").order("created_at",{ascending:false});
+  if(error){alert("โหลดข้อมูลไม่สำเร็จ: "+error.message);return;}
+  data=rows||[];
+  $("rows").innerHTML=data.map(r=>`<tr>
+<td>${new Date(r.created_at).toLocaleString("th-TH")}</td>
+<td>${esc(r.first_name)}</td><td>${esc(r.last_name)}</td><td>${esc(r.gender)}</td>
+<td>${r.age}</td><td>${esc(r.drinking_frequency)}</td><td>${esc(r.quit_intention)}</td><td>${esc(r.attendance)}</td>
+</tr>`).join("");
+  $("total").textContent=data.length;
+  $("attend").textContent=data.filter(x=>x.attendance==="มา").length;
+  $("notAttend").textContent=data.filter(x=>x.attendance==="ไม่มา").length;
+  $("avgAge").textContent=data.length?(data.reduce((s,x)=>s+Number(x.age||0),0)/data.length).toFixed(1):"-";
+}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
+$("refresh").onclick=load;
+$("logout").onclick=async()=>{await db.auth.signOut();location.reload()};
+$("export").onclick=()=>{
+  const cols=["created_at","first_name","last_name","gender","age","drinking_frequency","quit_intention","attendance"];
+  const csv=[cols.join(","),...data.map(r=>cols.map(k=>`"${String(r[k]??"").replaceAll('"','""')}"`).join(","))].join("\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.download="survey_responses.csv";a.click();
+};
+boot();
+</script>
+</body></html>
