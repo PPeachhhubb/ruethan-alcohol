@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<title>แบบสอบถาม รู้ทัน รู้คิด รู้พิษแอลกอฮอล์</title>
+<style>
+:root{--pink:#e84d72;--dark:#40394f;--bg:#fff9f3}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Noto Sans Thai",Tahoma,sans-serif;color:var(--dark);background:linear-gradient(135deg,#fff7ef,#f4fbff,#f1edff)}
+.wrap{max-width:880px;margin:auto;padding:25px 16px 55px}
+.hero{background:linear-gradient(135deg,#ddf6f2,#eee9ff);padding:32px 24px;border-radius:28px;text-align:center;box-shadow:0 10px 30px #51475a18}
+.badge{display:inline-block;background:#fff;border-radius:99px;padding:7px 15px;color:var(--pink);font-weight:bold}
+h1{font-size:clamp(27px,5vw,40px);margin:14px 0 8px}
+.hero p{line-height:1.8;margin:0}
+.card{background:white;border:1px solid #eadfe2;border-radius:22px;padding:24px;margin-top:18px;box-shadow:0 8px 25px #51475a12}
+h2{font-size:21px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label.title{font-weight:bold;display:block;margin-bottom:7px}
+.req{color:var(--pink)}
+input[type=text],input[type=number],select{width:100%;padding:13px;border:1px solid #d8d0d5;border-radius:12px;font:inherit;background:#fff}
+.options{display:grid;gap:10px}
+.option{display:flex;gap:10px;align-items:center;padding:12px 14px;border:1px solid #e5dfe2;border-radius:13px;cursor:pointer}
+.option input{accent-color:var(--pink)}
+.note{background:#fff5e6;border-left:5px solid #e4a23a;border-radius:10px;padding:14px;line-height:1.7;font-size:14px}
+button{width:100%;border:0;border-radius:14px;padding:15px;background:linear-gradient(90deg,#e84d72,#d94367);color:#fff;font:700 18px inherit;cursor:pointer;margin-top:16px}
+.success{display:none;text-align:center}
+.check{font-size:48px}
+.small{text-align:center;color:#777;font-size:12px;line-height:1.6;margin-top:12px}
+.sticker{position:absolute;display:flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:22px;background:rgba(255,255,255,.94);border:3px solid #fff;box-shadow:0 8px 18px #51475a22;font-size:34px;transform:rotate(-8deg);z-index:2;user-select:none}
+.sticker.s1{left:-18px;top:24px;background:#fff1f4}
+.sticker.s2{right:-18px;top:42px;background:#eef8ff;transform:rotate(9deg)}
+.sticker.s3{left:7%;bottom:-30px;width:62px;height:62px;font-size:29px;background:#f4efff;transform:rotate(7deg)}
+.sticker.s4{right:8%;bottom:-30px;width:62px;height:62px;font-size:29px;background:#effaf1;transform:rotate(-7deg)}
+.sticker.s5{right:-12px;top:18px;width:58px;height:58px;font-size:27px;background:#fff7df;transform:rotate(12deg)}
+.hero{position:relative;overflow:visible}
+.hero-inner{position:relative;z-index:3}
+.card{position:relative}
+.card .card-sticker{position:absolute;right:16px;top:-17px;width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#fff;border:2px solid #f0e4e8;box-shadow:0 6px 14px #51475a18;font-size:23px;transform:rotate(7deg)}
+.section-title{padding-right:50px}
+.decor-line{display:flex;justify-content:center;gap:8px;margin-top:14px;opacity:.9}
+.decor-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.decor-dot.p{background:#f3a1b7}.decor-dot.b{background:#9fd8ef}.decor-dot.y{background:#f2cf7c}.decor-dot.g{background:#9fd6b0}
+@media(max-width:650px){
+  .sticker{width:58px;height:58px;font-size:28px}
+  .sticker.s1{left:-8px}.sticker.s2{right:-8px}
+  .sticker.s3,.sticker.s4{bottom:-25px;width:52px;height:52px;font-size:25px}
+  .card .card-sticker{right:12px;top:-14px;width:40px;height:40px;font-size:21px}
+}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.card{padding:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<div class="sticker s1" aria-hidden="true">🚫🍺</div>
+<div class="sticker s2" aria-hidden="true">🧠</div>
+<div class="sticker s3" aria-hidden="true">❤️</div>
+<div class="sticker s4" aria-hidden="true">🌱</div>
+<div class="sticker s5" aria-hidden="true">💧</div>
+<div class="hero-inner">
+<span class="badge">แบบสอบถามกิจกรรมส่งเสริมสุขภาพ</span>
+<h1>รู้ทัน รู้คิด รู้พิษแอลกอฮอล์</h1>
+<p>แบบสอบถามความตั้งใจในการลดหรือเลิกดื่ม เพื่อใช้ประกอบการวางแผนกิจกรรมส่งเสริมสุขภาพ</p>
+<div class="decor-line" aria-hidden="true"><span class="decor-dot p"></span><span class="decor-dot b"></span><span class="decor-dot y"></span><span class="decor-dot g"></span></div>
+</div>
+</header>
+
+<form id="survey">
+<section class="card"><div class="card-sticker" aria-hidden="true">👤</div>
+<h2 class="section-title">ข้อมูลผู้ตอบแบบสอบถาม</h2>
+<div class="grid">
+<div><label class="title" for="fname">ชื่อ <span class="req">*</span></label><input id="fname" required></div>
+<div><label class="title" for="lname">นามสกุล <span class="req">*</span></label><input id="lname" required></div>
+<div><label class="title" for="gender">เพศ <span class="req">*</span></label>
+<select id="gender" required><option value="">-- กรุณาเลือก --</option><option>ชาย</option><option>หญิง</option><option>ไม่ประสงค์ระบุ</option><option>อื่น ๆ</option></select></div>
+<div><label class="title" for="age">อายุ (ปี) <span class="req">*</span></label><input id="age" type="number" min="1" max="120" required></div>
+</div>
+</section>
+
+<section class="card"><div class="card-sticker" aria-hidden="true">🚫🍷</div>
+<h2 class="section-title">ความถี่ในการดื่ม</h2>
+<label class="title" for="frequency">โดยทั่วไป ท่านดื่มเครื่องดื่มแอลกอฮอล์สัปดาห์ละกี่วัน <span class="req">*</span></label>
+<select id="frequency" required>
+<option value="">-- กรุณาเลือก --</option>
+<option>ไม่ดื่ม</option><option>1 วันต่อสัปดาห์</option><option>2 วันต่อสัปดาห์</option>
+<option>3 วันต่อสัปดาห์</option><option>4 วันต่อสัปดาห์</option><option>5 วันต่อสัปดาห์</option>
+<option>6 วันต่อสัปดาห์</option><option>ทุกวัน</option>
+</select>
+</section>
+
+<section class="card"><div class="card-sticker" aria-hidden="true">🎯</div>
+<h2 class="section-title">ความตั้งใจในการลดหรือเลิกดื่ม</h2>
+<p>ท่านตั้งใจที่จะลดหรือเลิกดื่มเป็นระยะเวลาเท่าใด <span class="req">*</span></p>
+<div class="options">
+<label class="option"><input type="radio" name="intent" required value="7 วัน"> 7 วัน</label>
+<label class="option"><input type="radio" name="intent" value="14 วัน"> 14 วัน</label>
+<label class="option"><input type="radio" name="intent" value="30 วัน"> 30 วัน</label>
+<label class="option"><input type="radio" name="intent" value="มากกว่า 30 วัน"> มากกว่า 30 วัน</label>
+<label class="option"><input type="radio" name="intent" value="ตลอดไป"> ตั้งใจเลิกตลอดไป</label>
+</div>
+</section>
+
+<section class="card"><div class="card-sticker" aria-hidden="true">🤝</div>
+<h2 class="section-title">การเข้าร่วมกิจกรรม</h2>
+<p>หากมีการจัดกิจกรรมส่งเสริมการลดหรือเลิกดื่มในวันที่กำหนด ท่านจะเข้าร่วมกิจกรรมหรือไม่ <span class="req">*</span></p>
+<div class="options">
+<label class="option"><input type="radio" name="attend" required value="มา"> มาเข้าร่วมกิจกรรม</label>
+<label class="option"><input type="radio" name="attend" value="ไม่มา"> ไม่เข้าร่วมกิจกรรม</label>
+</div>
+</section>
+
+<section class="card"><div class="card-sticker" aria-hidden="true">🌿</div>
+<div class="note"><b>การเก็บข้อมูล:</b> ข้อมูลจะถูกใช้เพื่อประกอบโครงงานและการวางแผนกิจกรรมส่งเสริมสุขภาพ ผู้จัดทำจะเก็บรักษาข้อมูลอย่างเหมาะสมและไม่นำข้อมูลไปเผยแพร่ในลักษณะที่ระบุตัวบุคคลโดยไม่จำเป็น</div>
+<label class="option" style="margin-top:12px">
+  <input id="consent" type="checkbox" required>
+  ข้าพเจ้ายินยอมให้เก็บและใช้ข้อมูลที่กรอกในแบบสอบถามนี้เพื่อวัตถุประสงค์ของโครงงาน
+</label>
+<button type="submit">ส่งแบบสอบถาม</button>
+<div class="small">สำหรับโครงงานหรือการสาธิต ควรหลีกเลี่ยงการใช้ข้อมูลส่วนบุคคลจริงโดยไม่จำเป็น</div>
+</section>
+</form>
+
+<section class="card success" id="success">
+<div class="check">✓</div>
+<h2>ขอบคุณสำหรับการตอบแบบสอบถาม</h2>
+<p>ระบบได้รับคำตอบในหน้านี้แล้ว</p>
+<button type="button" onclick="location.reload()">กรอกแบบสอบถามอีกครั้ง</button>
+</section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+
+<script>
+const { createClient } = supabase;
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const form = document.getElementById("survey");
+const button = form.querySelector('button[type="submit"]');
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  button.disabled = true;
+  button.textContent = "กำลังบันทึกข้อมูล...";
+
+  const payload = {
+    first_name: document.getElementById("fname").value.trim(),
+    last_name: document.getElementById("lname").value.trim(),
+    gender: document.getElementById("gender").value,
+    age: Number(document.getElementById("age").value),
+    drinking_frequency: document.getElementById("frequency").value,
+    quit_intention: document.querySelector('input[name="intent"]:checked')?.value || "",
+    attendance: document.querySelector('input[name="attend"]:checked')?.value || "",
+    consent: document.getElementById("consent").checked
+  };
+
+  const { error } = await db.from("survey_responses").insert(payload);
+
+  if (error) {
+    console.error(error);
+    alert("ไม่สามารถบันทึกข้อมูลได้ กรุณาลองใหม่อีกครั้ง");
+    button.disabled = false;
+    button.textContent = "ส่งแบบสอบถาม";
+    return;
+  }
+
+  window.location.href = "https://ruethan-alcohol.vercel.app";
+});
+</script>
+</body>
+</html>
