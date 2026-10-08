@@ -1,107 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin | รู้ทัน รู้คิด รู้พิษแอลกอฮอล์</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../config.js"></script>
 <style>
-:root{--pink:#e84d72;--ink:#4c4650;--bg:#fff9f8;--card:#fff;--line:#eadfe2}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff7f4,#f4f9ff);font-family:system-ui,"Noto Sans Thai",sans-serif;color:var(--ink)}
-.wrap{max-width:1180px;margin:auto;padding:24px}.hero,.card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 10px 30px #4c465014}.hero{padding:28px;margin-bottom:18px}.hero h1{margin:6px 0;font-size:30px}.hero p{margin:0;color:#777}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.stat{padding:18px;background:#fff;border:1px solid var(--line);border-radius:18px}.stat b{font-size:28px;display:block;color:var(--pink)}
-.card{padding:20px;overflow:auto}h2{margin-top:0}
-button{border:0;border-radius:12px;padding:11px 15px;background:var(--pink);color:#fff;font-weight:700;cursor:pointer}button.secondary{background:#6d6870}button.danger{background:#777}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-table{width:100%;border-collapse:collapse;min-width:950px}th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:14px}th{background:#fff5f7;position:sticky;top:0}
-.login{max-width:430px;margin:70px auto}.login input{width:100%;padding:13px;margin:7px 0 12px;border:1px solid var(--line);border-radius:12px;font:inherit}.msg{margin-top:10px;color:#b33}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}}
+:root{--pink:#e84d72;--dark:#40394f;--line:#eadfe2}
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans Thai",Tahoma,sans-serif;color:var(--dark);background:linear-gradient(135deg,#fff7ef,#f4fbff,#f1edff)}
+.wrap{max-width:1200px;margin:auto;padding:24px 16px 50px}.hero,.card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 8px 25px #51475a12}.hero{background:linear-gradient(135deg,#ddf6f2,#eee9ff);padding:28px 24px;margin-bottom:18px}.card{padding:22px;margin-top:18px}
+.badge{display:inline-block;background:#fff;border-radius:99px;padding:7px 15px;color:var(--pink);font-weight:bold}h1{margin:12px 0 6px;font-size:clamp(26px,5vw,38px)}p{line-height:1.7}
+.login{max-width:480px;margin:40px auto}label{display:block;font-weight:bold;margin:12px 0 7px}input{width:100%;padding:13px;border:1px solid #d8d0d5;border-radius:12px;font:inherit}
+button{border:0;border-radius:12px;padding:12px 16px;font:700 15px inherit;cursor:pointer}.primary{width:100%;background:linear-gradient(90deg,#e84d72,#d94367);color:#fff;margin-top:16px}.secondary{background:#eee9ff;color:#40394f}.logout{background:#fff;border:1px solid #ddd}.delete{background:#fff0f3;color:#c62e52;border:1px solid #f2b7c5;padding:8px 11px;font-size:13px}
+button:disabled{opacity:.55;cursor:not-allowed}.error,.success{display:none;border-radius:12px;padding:12px;margin-top:14px}.error{background:#fff0f3;color:#a52847;border:1px solid #f2b7c5}.success{background:#effaf1;color:#287343;border:1px solid #b9e1c4}
+.topbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.stat{background:#faf7ff;border:1px solid var(--line);border-radius:16px;padding:16px}.stat b{display:block;font-size:28px;color:var(--pink);margin-top:4px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.table-wrap{overflow:auto;margin-top:16px}table{width:100%;border-collapse:collapse;min-width:1050px}th,td{border-bottom:1px solid #eee5e8;padding:12px 10px;text-align:left;vertical-align:top}th{background:#faf7fb;white-space:nowrap}td{font-size:14px}.muted{color:#777;font-size:13px}.empty{text-align:center;padding:35px;color:#777}#adminArea{display:none}
+@media(max-width:700px){.stats{grid-template-columns:1fr}.card{padding:17px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<section id="loginBox" class="card login">
-<h1>🔐 ผู้ดูแลระบบ</h1>
-<p>เข้าสู่ระบบเพื่อดูข้อมูลแบบสอบถาม</p>
-<input id="email" type="email" placeholder="อีเมล">
-<input id="password" type="password" placeholder="รหัสผ่าน">
-<button id="loginBtn">เข้าสู่ระบบ</button>
-<div id="loginMsg" class="msg"></div>
+<section id="loginArea" class="card login">
+<span class="badge">🔐 Admin</span><h1>จัดการแบบสอบถาม</h1><p>เข้าสู่ระบบสำหรับผู้ดูแลระบบ</p>
+<form id="loginForm">
+<label for="email">อีเมล</label><input id="email" type="email" autocomplete="username" required>
+<label for="password">รหัสผ่าน</label><input id="password" type="password" autocomplete="current-password" required>
+<button class="primary" type="submit" id="loginBtn">เข้าสู่ระบบ</button>
+</form><div id="loginError" class="error"></div>
 </section>
 
-<div id="app" style="display:none">
-<header class="hero">
-<h1>🌱 รู้ทัน รู้คิด รู้พิษแอลกอฮอล์</h1>
-<p>แดชบอร์ดข้อมูลแบบสอบถามสำหรับผู้จัดทำโครงงาน</p>
-</header>
-<div class="grid">
-<div class="stat">ผู้ตอบทั้งหมด<b id="total">0</b></div>
-<div class="stat">มาเข้าร่วมกิจกรรม<b id="attend">0</b></div>
-<div class="stat">ไม่มา<b id="notAttend">0</b></div>
-<div class="stat">อายุเฉลี่ย<b id="avgAge">-</b></div>
-</div>
+<section id="adminArea">
+<header class="hero"><div class="topbar"><div><span class="badge">📊 Admin Dashboard</span><h1>รู้ทัน รู้คิด รู้พิษแอลกอฮอล์</h1><p>จัดการข้อมูลแบบสอบถาม</p></div><button class="logout" id="logoutBtn">ออกจากระบบ</button></div></header>
 <section class="card">
-<div class="toolbar">
-<button id="refresh">🔄 รีเฟรช</button>
-<button id="export">📥 Export CSV</button>
-<button class="secondary" id="logout">ออกจากระบบ</button>
-</div>
-<table>
-<thead><tr><th>วันเวลา</th><th>ชื่อ</th><th>นามสกุล</th><th>เพศ</th><th>อายุ</th><th>ความถี่</th><th>ความตั้งใจ</th><th>กิจกรรม</th></tr></thead>
-<tbody id="rows"></tbody>
-</table>
-</section>
-</div>
+<div class="topbar"><div><h2 style="margin:0">ข้อมูลผู้ตอบแบบสอบถาม</h2><div class="muted" id="adminEmail"></div></div>
+<div class="toolbar"><button class="secondary" id="refreshBtn">↻ รีเฟรช</button><button class="secondary" id="csvBtn">⬇ ส่งออก CSV</button></div></div>
+<div class="stats"><div class="stat">จำนวนทั้งหมด<b id="total">0</b></div><div class="stat">เข้าร่วมกิจกรรม<b id="attend">0</b></div><div class="stat">อายุเฉลี่ย<b id="avgAge">-</b></div></div>
+<div id="adminError" class="error"></div><div id="adminSuccess" class="success"></div>
+<div class="table-wrap"><table><thead><tr><th>ID</th><th>วันที่</th><th>ชื่อ</th><th>นามสกุล</th><th>เพศ</th><th>อายุ</th><th>ความถี่ดื่ม</th><th>ความตั้งใจ</th><th>เข้าร่วม</th><th>ยินยอม</th><th>จัดการ</th></tr></thead>
+<tbody id="tableBody"><tr><td colspan="11" class="empty">กำลังโหลดข้อมูล...</td></tr></tbody></table></div>
+</section></section>
 </div>
 
-<script src="../config.js"></script>
 <script>
 const {createClient}=supabase;
 const db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-let data=[];
-
+let rows=[];
 const $=id=>document.getElementById(id);
-$("loginBtn").onclick=async()=>{
-  $("loginMsg").textContent="";
-  const {error}=await db.auth.signInWithPassword({email:$("email").value,password:$("password").value});
-  if(error){$("loginMsg").textContent="เข้าสู่ระบบไม่สำเร็จ: "+error.message;return;}
-  await boot();
-};
+function msg(el,text){el.textContent=text;el.style.display="block"}
+function hide(el){el.style.display="none"}
+function esc(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
 
-async function boot(){
-  const {data:{session}}=await db.auth.getSession();
-  if(!session)return;
-  const {data:admin,error:adminErr}=await db.from("admin_users").select("user_id").eq("user_id",session.user.id).maybeSingle();
-  if(adminErr||!admin){
-    await db.auth.signOut();
-    $("loginMsg").textContent="บัญชีนี้ยังไม่ได้รับสิทธิ์ผู้ดูแล";
-    return;
-  }
-  $("loginBox").style.display="none"; $("app").style.display="block"; load();
+async function checkAdmin(user){
+ const {data,error}=await db.from("admin_users").select("user_id").eq("user_id",user.id).maybeSingle();
+ if(error)throw error;
+ return !!data;
 }
+async function showDashboard(user){
+ if(!(await checkAdmin(user))){await db.auth.signOut();throw new Error("บัญชีนี้ไม่มีสิทธิ์เป็นผู้ดูแลระบบ")}
+ $("loginArea").style.display="none";$("adminArea").style.display="block";$("adminEmail").textContent="บัญชี: "+(user.email||"");
+ await loadData();
+}
+$("loginForm").addEventListener("submit",async e=>{
+ e.preventDefault();hide($("loginError"));$("loginBtn").disabled=true;$("loginBtn").textContent="กำลังเข้าสู่ระบบ...";
+ const {data,error}=await db.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});
+ if(error){msg($("loginError"),"เข้าสู่ระบบไม่สำเร็จ: "+error.message);$("loginBtn").disabled=false;$("loginBtn").textContent="เข้าสู่ระบบ";return}
+ try{await showDashboard(data.user)}catch(err){msg($("loginError"),err.message);$("loginBtn").disabled=false;$("loginBtn").textContent="เข้าสู่ระบบ"}
+});
 
-async function load(){
-  const {data:rows,error}=await db.from("survey_responses").select("*").order("created_at",{ascending:false});
-  if(error){alert("โหลดข้อมูลไม่สำเร็จ: "+error.message);return;}
-  data=rows||[];
-  $("rows").innerHTML=data.map(r=>`<tr>
-<td>${new Date(r.created_at).toLocaleString("th-TH")}</td>
-<td>${esc(r.first_name)}</td><td>${esc(r.last_name)}</td><td>${esc(r.gender)}</td>
-<td>${r.age}</td><td>${esc(r.drinking_frequency)}</td><td>${esc(r.quit_intention)}</td><td>${esc(r.attendance)}</td>
-</tr>`).join("");
-  $("total").textContent=data.length;
-  $("attend").textContent=data.filter(x=>x.attendance==="มา").length;
-  $("notAttend").textContent=data.filter(x=>x.attendance==="ไม่มา").length;
-  $("avgAge").textContent=data.length?(data.reduce((s,x)=>s+Number(x.age||0),0)/data.length).toFixed(1):"-";
+async function loadData(){
+ hide($("adminError"));hide($("adminSuccess"));$("tableBody").innerHTML='<tr><td colspan="11" class="empty">กำลังโหลดข้อมูล...</td></tr>';
+ const {data,error}=await db.from("survey_responses").select("*").order("created_at",{ascending:false});
+ if(error){msg($("adminError"),"โหลดข้อมูลไม่สำเร็จ: "+error.message);return}
+ rows=data||[];renderTable();
 }
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));}
-$("refresh").onclick=load;
-$("logout").onclick=async()=>{await db.auth.signOut();location.reload()};
-$("export").onclick=()=>{
-  const cols=["created_at","first_name","last_name","gender","age","drinking_frequency","quit_intention","attendance"];
-  const csv=[cols.join(","),...data.map(r=>cols.map(k=>`"${String(r[k]??"").replaceAll('"','""')}"`).join(","))].join("\n");
-  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.download="survey_responses.csv";a.click();
-};
-boot();
+function renderTable(){
+ $("total").textContent=rows.length;
+ $("attend").textContent=rows.filter(r=>r.attendance==="มา").length;
+ const ages=rows.map(r=>Number(r.age)).filter(n=>Number.isFinite(n)&&n>0);
+ $("avgAge").textContent=ages.length?(ages.reduce((a,b)=>a+b,0)/ages.length).toFixed(1):"-";
+ if(!rows.length){$("tableBody").innerHTML='<tr><td colspan="11" class="empty">ยังไม่มีข้อมูลแบบสอบถาม</td></tr>';return}
+ $("tableBody").innerHTML=rows.map(r=>`<tr>
+<td>${esc(r.id)}</td><td>${esc(r.created_at?new Date(r.created_at).toLocaleString("th-TH"):"-")}</td>
+<td>${esc(r.first_name)}</td><td>${esc(r.last_name)}</td><td>${esc(r.gender)}</td><td>${esc(r.age)}</td>
+<td>${esc(r.drinking_frequency)}</td><td>${esc(r.quit_intention)}</td><td>${esc(r.attendance)}</td>
+<td>${r.consent?"✓":"ไม่ยินยอม"}</td><td><button class="delete" data-id="${esc(r.id)}">🗑️ ลบ</button></td></tr>`).join("");
+ document.querySelectorAll(".delete").forEach(b=>b.addEventListener("click",()=>deleteOne(b.dataset.id)));
+}
+async function deleteOne(id){
+ const row=rows.find(r=>String(r.id)===String(id));if(!row)return;
+ const name=`${row.first_name||""} ${row.last_name||""}`.trim()||"รายการนี้";
+ if(!confirm(`ต้องการลบข้อมูลของ "${name}" (ID ${id}) ใช่หรือไม่?\n\nการลบนี้จะลบเฉพาะรายการนี้และไม่สามารถย้อนกลับได้`))return;
+ hide($("adminError"));hide($("adminSuccess"));
+ const {error}=await db.from("survey_responses").delete().eq("id",id);
+ if(error){msg($("adminError"),"ลบข้อมูลไม่สำเร็จ: "+error.message);return}
+ msg($("adminSuccess"),`ลบข้อมูล ID ${id} เรียบร้อยแล้ว`);await loadData();
+}
+$("refreshBtn").addEventListener("click",loadData);
+$("logoutBtn").addEventListener("click",async()=>{await db.auth.signOut();$("adminArea").style.display="none";$("loginArea").style.display="block";$("loginForm").reset();hide($("loginError"))});
+$("csvBtn").addEventListener("click",()=>{
+ if(!rows.length){alert("ยังไม่มีข้อมูลสำหรับส่งออก");return}
+ const headers=["id","created_at","first_name","last_name","gender","age","drinking_frequency","quit_intention","attendance","consent"];
+ const csv="\uFEFF"+[headers,...rows.map(r=>headers.map(h=>r[h]))].map(row=>row.map(v=>`"${String(v??"").replaceAll('"','""')}"`).join(",")).join("\r\n");
+ const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));const a=document.createElement("a");a.href=url;a.download="survey_responses.csv";a.click();URL.revokeObjectURL(url);
+});
+(async()=>{const {data}=await db.auth.getSession();if(data.session?.user){try{await showDashboard(data.session.user)}catch(e){msg($("loginError"),e.message);await db.auth.signOut()}}})();
 </script>
-</body></html>
+</body>
+</html>
