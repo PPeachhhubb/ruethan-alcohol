@@ -19,7 +19,7 @@ h1{font-size:clamp(2.2rem,5vw,4.4rem);line-height:1.12;margin:18px 0 12px;color:
 .bottle-zone{position:relative;min-height:390px;display:flex;align-items:center;justify-content:center}.glow{position:absolute;width:310px;height:310px;border-radius:50%;background:#ffffff99}
 .bottle{font-size:10rem;filter:drop-shadow(0 15px 8px #0002);transform:rotate(-7deg);z-index:2}.sticker{position:absolute;background:#fff;border-radius:20px;padding:10px 15px;box-shadow:0 8px 20px #0002;font-size:1.8rem;z-index:3}.s1{top:35px;right:5%}.s2{bottom:35px;left:4%}.s3{top:48%;right:0;font-size:1rem;color:#d94f70}
 section{padding:70px 7%;max-width:1250px;margin:auto}.section-title{text-align:center;margin-bottom:38px}.section-title h2{font-size:2.2rem;margin:0;color:#38333f}.section-title p{color:#77717c;margin:5px auto;max-width:760px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.card{background:#fff;border-radius:24px;padding:27px;box-shadow:0 8px 30px #5d455c10;border:1px solid #f0e8e8;transition:.25s}.card:hover{transform:translateY(-5px);box-shadow:0 14px 35px #5d455c18}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.life-grid{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:1050px){.life-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}.card{background:#fff;border-radius:24px;padding:27px;box-shadow:0 8px 30px #5d455c10;border:1px solid #f0e8e8;transition:.25s}.card:hover{transform:translateY(-5px);box-shadow:0 14px 35px #5d455c18}
 .icon{font-size:2.5rem;margin-bottom:8px}.card h3{margin:5px 0 8px;color:#4d4654}.card p{margin:0;color:#6c6670}
 .toxin{background:linear-gradient(135deg,#eeeaff,#e8f8f4);border-radius:30px;padding:38px}.toxin-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;align-items:center}.molecule{font-size:5rem;text-align:center;letter-spacing:10px}.warning{background:#fff3d7;border-left:5px solid #f0ad3d;padding:15px 18px;border-radius:12px;margin-top:18px}
 .fact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.fact{background:#fff;border-radius:22px;padding:25px;text-align:center;border:1px solid #f1e7e7}.fact strong{display:block;font-size:2.1rem;color:#d94f70}.fact span{color:#6d6670}
@@ -123,23 +123,28 @@ footer{background:#393541;color:#fff;text-align:center;padding:30px 7%;margin-to
 <section id="life-impact">
   <div class="section-title">
     <h2>💥 ผลกระทบไม่ได้เกิดกับร่างกายเท่านั้น</h2>
-    <p>การบริโภคแอลกอฮอล์อาจส่งผลต่อการดำเนินชีวิต การศึกษา สถานะทางการเงิน และความสัมพันธ์กับบุคคลรอบข้าง</p>
+    <p>การดื่มแอลกอฮอล์อาจส่งผลมากกว่าสุขภาพของผู้ดื่ม เช่น ทำให้การเรียนหรือการทำงานมีประสิทธิภาพลดลง เพิ่มภาระค่าใช้จ่ายของครอบครัว ทำให้เกิดความขัดแย้งกับคนใกล้ชิด และส่งผลต่อสังคมผ่านความเสี่ยงต่ออุบัติเหตุ เหตุทะเลาะวิวาท ประสิทธิภาพการทำงาน และภาระต่อระบบสาธารณสุข</p>
   </div>
   <div class="grid">
     <div class="card">
       <div class="icon">📚</div>
       <h3>การเรียน</h3>
-      <p>อาจส่งผลให้สมาธิในการเรียนลดลง พักผ่อนไม่เพียงพอ และประสิทธิภาพในการเรียนรู้ลดลง</p>
+      <p>การดื่มแอลกอฮอล์อาจทำให้นอนหลับไม่มีคุณภาพ พักผ่อนไม่เพียงพอ และส่งผลให้สมาธิ ความจำ และการทำความเข้าใจบทเรียนลดลง จนอาจทำงานหรือส่งงานได้ไม่เต็มประสิทธิภาพ</p>
     </div>
     <div class="card">
       <div class="icon">💸</div>
-      <h3>ค่าใช้จ่าย</h3>
-      <p>ค่าใช้จ่ายในการซื้อเครื่องดื่มแอลกอฮอล์อาจสะสมเป็นภาระทางการเงิน และอาจนำไปสู่ปัญหาทางการเงินได้</p>
+      <h3>ค่าใช้จ่ายและภาระทางการเงิน</h3>
+      <p>เงินที่ใช้ซื้อเครื่องดื่มแอลกอฮอล์อาจทำให้เหลือเงินสำหรับค่าอาหาร ค่าเดินทาง หรือค่าใช้จ่ายในบ้านน้อยลง หากเกิดปัญหาสุขภาพหรือขาดงาน ยังอาจมีค่ารักษาพยาบาลและรายได้ที่ลดลงตามมา</p>
     </div>
     <div class="card">
       <div class="icon">👨‍👩‍👧</div>
-      <h3>ความสัมพันธ์</h3>
-      <p>การดื่มที่เป็นปัญหาอาจเพิ่มโอกาสเกิดความขัดแย้งกับครอบครัว เพื่อน หรือบุคคลใกล้ชิด</p>
+      <h3>ครอบครัวและความสัมพันธ์</h3>
+      <p>การดื่มที่เป็นปัญหาอาจทำให้ควบคุมอารมณ์และการสื่อสารได้ยากขึ้น จนนำไปสู่การพูดจารุนแรงหรือความขัดแย้งในครอบครัว คนใกล้ชิดอาจเกิดความเครียด ความกังวล และต้องรับภาระดูแลหรือจัดการปัญหาที่ตามมา</p>
+    </div>
+    <div class="card">
+      <div class="icon">🏙️</div>
+      <h3>สังคมและชุมชน</h3>
+      <p>การดื่มแอลกอฮอล์ที่เป็นปัญหาอาจส่งผลต่อความปลอดภัยของคนในสังคม เช่น เพิ่มความเสี่ยงต่ออุบัติเหตุบนท้องถนนและเหตุทะเลาะวิวาท ทำให้ผู้อื่นได้รับบาดเจ็บหรือได้รับความเดือดร้อน นอกจากนี้ยังอาจทำให้ประสิทธิภาพในการทำงานลดลง เพิ่มภาระต่อระบบสาธารณสุข และทำให้ชุมชนต้องร่วมกันรับมือกับปัญหาที่เกิดขึ้น</p>
     </div>
   </div>
 </section>
@@ -170,6 +175,35 @@ footer{background:#393541;color:#fff;text-align:center;padding:30px 7%;margin-to
     <div class="card myth" onclick="this.classList.toggle('open')"><h3>“ดื่มนิดเดียวไม่มีความเสี่ยงเลย”</h3><p class="click">เลือกเพื่อดูคำอธิบาย</p><div class="answer">ไม่ควรสรุปว่าการบริโภคในปริมาณเล็กน้อยไม่มีความเสี่ยง เนื่องจากองค์การอนามัยโลกระบุว่าการบริโภคแอลกอฮอล์มีความเสี่ยงต่อสุขภาพ</div></div>
     <div class="card myth" onclick="this.classList.toggle('open')"><h3>“แอลกอฮอล์มีผลแค่กับตับ”</h3><p class="click">เลือกเพื่อดูคำอธิบาย</p><div class="answer">ไม่ถูกต้อง ผลกระทบสามารถเกี่ยวข้องกับหลายระบบ เช่น สมอง หัวใจ ระบบย่อยอาหาร สุขภาพจิต การบาดเจ็บ และความเสี่ยงต่อการเกิดมะเร็ง</div></div>
     <div class="card myth" onclick="this.classList.toggle('open')"><h3>“ผลกระทบมีเฉพาะคนที่ดื่มเท่านั้น”</h3><p class="click">เลือกเพื่อดูคำอธิบาย</p><div class="answer">ไม่เสมอไป ผลกระทบจากแอลกอฮอล์อาจส่งผลต่อบุคคลอื่นผ่านอุบัติเหตุ ความขัดแย้ง และปัญหาทางสังคม</div></div>
+  </div>
+</section>
+
+<section id="prevention">
+  <div class="section-title">
+    <h2>🛡️ การหลีกเลี่ยงและลดความเสี่ยงจากแอลกอฮอล์</h2>
+    <p>เรียนรู้วิธีปฏิเสธคำชักชวน หลีกเลี่ยงสถานการณ์เสี่ยง และขอความช่วยเหลือเมื่อพบเหตุการณ์ที่ไม่ปลอดภัย</p>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">✋</div>
+      <h3>การปฏิเสธคำชักชวน</h3>
+      <p>ปฏิเสธอย่างสุภาพแต่หนักแน่น เช่น “ไม่ดื่ม ขอบคุณนะ” หรือ “เราไม่สะดวก” ไม่จำเป็นต้องให้เหตุผลยืดยาว หากถูกชักชวนซ้ำ ให้ยืนยันคำตอบเดิมและเดินออกจากสถานการณ์นั้นได้</p>
+    </div>
+    <div class="card">
+      <div class="icon">🚧</div>
+      <h3>หลีกเลี่ยงสถานการณ์เสี่ยง</h3>
+      <p>หลีกเลี่ยงงานหรือสถานที่ที่มีแรงกดดันให้ดื่ม และอยู่กับเพื่อนหรือคนที่เคารพการตัดสินใจของเรา วางแผนเดินทางกลับอย่างปลอดภัยโดยไม่ขึ้นรถกับผู้ที่ดื่มแอลกอฮอล์</p>
+    </div>
+    <div class="card">
+      <div class="icon">🤝</div>
+      <h3>ขอความช่วยเหลือจากคนที่ไว้ใจ</h3>
+      <p>หากถูกกดดันหรือรู้สึกไม่ปลอดภัย ควรติดต่อผู้ปกครอง ครู หรือผู้ใหญ่ที่ไว้ใจ เพื่อขอให้ช่วยพาออกจากสถานการณ์ ไม่จำเป็นต้องรับมือเพียงลำพัง</p>
+    </div>
+    <div class="card">
+      <div class="icon">📢</div>
+      <h3>ช่วยกันสร้างสภาพแวดล้อมที่ปลอดภัย</h3>
+      <p>ไม่กดดันหรือชักชวนผู้อื่นให้ดื่ม เคารพการปฏิเสธของกันและกัน และช่วยแจ้งผู้ใหญ่หรือหน่วยงานที่เกี่ยวข้องเมื่อพบเหตุเสี่ยง เพื่อป้องกันอุบัติเหตุและความเดือดร้อนในชุมชน</p>
+    </div>
   </div>
 </section>
 
